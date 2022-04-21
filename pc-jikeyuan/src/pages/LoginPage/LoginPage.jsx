@@ -1,7 +1,7 @@
 import { Button, Card, Checkbox, Form, Input, message } from "antd";
 import "./style/index.scss";
 
-import { login } from "@/apis/login";
+import { login } from "@/apis/userInfo";
 import { createBrowserHistory } from "history";
 import { useNavigate } from "react-router-dom";
 
