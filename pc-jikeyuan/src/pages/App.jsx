@@ -1,8 +1,9 @@
+import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+// 组件获取
 import LoginPage from "./LoginPage/LoginPage";
 import HomePage from "./HomePage/HomePage";
-import EditArticle from "./HomePage/EditArticle";
-import { useEffect } from "react";
+import EditArticle from "./HomePage/components/EditArticle";
 import HomeContent from "./HomePage/components/HomeContent";
 
 function Redirect({ to }) {
@@ -19,8 +20,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/" element={<HomePage />}>
-            <Route path="home" element={<HomeContent />} />
+          <Route path="/home" element={<HomePage />}>
+            <Route path="" element={<HomeContent />} />
             <Route path="article" element={<EditArticle />} />
             <Route path="publish" />
           </Route>

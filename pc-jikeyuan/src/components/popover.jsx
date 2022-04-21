@@ -1,11 +1,14 @@
 import { Popconfirm, Button, message } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
+import { removeToken } from "@/store/user.splice";
+import { useDispatch } from "react-redux";
 
 function Popover() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleLogout = () => {
-    localStorage.removeItem("@#@Token");
+    dispatch(removeToken());
     message.success("登出成功");
     navigate("/login", { replace: true });
   };

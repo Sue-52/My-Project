@@ -6,4 +6,12 @@ import "normalize.css";
 // antd
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 
-ReactDOM.render(<App />, document.getElementById("root"));
+import { Provider } from "react-redux";
+import store from "./store";
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);

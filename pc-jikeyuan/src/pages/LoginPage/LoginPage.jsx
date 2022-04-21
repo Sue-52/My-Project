@@ -1,24 +1,23 @@
 import { Button, Card, Checkbox, Form, Input, message } from "antd";
 import "./style/index.scss";
 
-import { login } from "@/apis/userInfo";
-import { createBrowserHistory } from "history";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+// import { useEffect } from "react";
+import { loadUser } from "@/store/user.splice";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleFinshForm = async (values) => {
-    // 路由跳转
-    let result = await login(values);
-    const { data } = result;
-    const token = data.token;
-
-    if (result.message === "OK") {
-      // 本地持久化
-      localStorage.setItem("@#@Token", token);
+    // 持久化存储
+    try {
+      await dispatch(loadUser(values));
       message.success("登录成功");
       navigate("/home", { replace: true });
+    } catch (error) {
+      message.error(error.response?.data?.message || "登录失败");
     }
   };
 
