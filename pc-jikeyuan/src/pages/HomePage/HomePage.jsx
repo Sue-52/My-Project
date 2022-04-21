@@ -32,7 +32,9 @@ function HomePage() {
 
   return (
     <Layout style={{ height: "100%" }}>
-      <Header style={{ padding: "0px" }}>
+      <Header
+        style={{ padding: "0px", position: "fixed", zIndex: 1, width: "100%" }}
+      >
         <div className="logo"></div>
         <div className="user-info">
           <span className="user-name">{userName}</span>
@@ -40,7 +42,17 @@ function HomePage() {
         </div>
       </Header>
       <Layout>
-        <Sider>
+        <Sider
+          style={{
+            overflow: "auto",
+            height: "100%",
+            paddingTop: 64,
+            position: "fixed",
+            left: 0,
+            top: 0,
+            bottom: 0,
+          }}
+        >
           <Menu
             defaultSelectedKeys={[
               location.pathname === "/home"
@@ -63,7 +75,7 @@ function HomePage() {
             </Menu.Item>
           </Menu>
         </Sider>
-        <Content style={{ padding: "20px" }}>
+        <Content style={{ padding: "20px", marginLeft: 200, marginTop: 74 }}>
           <Outlet />
         </Content>
       </Layout>

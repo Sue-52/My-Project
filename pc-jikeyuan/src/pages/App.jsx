@@ -5,6 +5,7 @@ import LoginPage from "./LoginPage/LoginPage";
 import HomePage from "./HomePage/HomePage";
 import EditArticle from "./HomePage/components/EditArticle";
 import HomeContent from "./HomePage/components/HomeContent";
+import PubArticle from "./HomePage/components/PubArticle";
 
 function Redirect({ to }) {
   let navigate = useNavigate();
@@ -23,7 +24,7 @@ function App() {
           <Route path="/home" element={<HomePage />}>
             <Route path="" element={<HomeContent />} />
             <Route path="article" element={<EditArticle />} />
-            <Route path="publish" />
+            <Route path="publish" element={<PubArticle />} />
           </Route>
           <Route path="/" element={<Redirect to="/login" />} />
         </Routes>

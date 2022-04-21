@@ -1,3 +1,4 @@
+import React from "react";
 import { Button, Card, Checkbox, Form, Input, message } from "antd";
 import "./style/index.scss";
 

@@ -13,7 +13,7 @@ export const loadUser = createAsyncThunk("user/loading", async (payload) => {
     localStorage.setItem("@#@Token", data.token)
     return data.token
   } catch (error) {
-    throw new Error(error.message)
+    throw new Error("请求失败")
   }
 })
 
