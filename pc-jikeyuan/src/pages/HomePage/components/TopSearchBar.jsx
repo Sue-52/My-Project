@@ -10,26 +10,39 @@ import {
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import styles from "./index.module.scss";
+import { getAllChannels, getListData } from "@/apis/list";
 
 const EditArticle = () => {
-  const [value, setValue] = useState(4);
+  const [value, setValue] = useState("4");
 
   const onChange = (e) => {
-    console.log("radio checked", e.target.value);
     setValue(e.target.value);
   };
 
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
+  // 发起请求获取下拉列表数据
+  const [options, setOptions] = useState([]);
+  const getChannels = async () => {
+    const { data } = await getAllChannels();
+    setOptions(data.channels);
   };
 
-  // 发起请求获取下拉列表数据
+  useEffect(() => {
+    getChannels();
+  }, []);
 
-  const handleSearchArticles = (values) => {
+  const handleSearchArticles = async (fieldsValue) => {
+    const rangeValue = fieldsValue["pubDate"];
+    const values = {
+      ...fieldsValue,
+      date: [
+        rangeValue[0].format("YYYY-MM-DD"),
+        rangeValue[1].format("YYYY-MM-DD"),
+      ],
+    };
     console.log(values);
+    await getListData(values);
   };
   return (
     <>
@@ -47,32 +60,33 @@ const EditArticle = () => {
         style={{ marginBottom: "20px" }}
       >
         {/* 表单 */}
-        <Form onFinish={handleSearchArticles}>
+        <Form
+          onFinish={handleSearchArticles}
+          initialValues={{
+            channel_id: "",
+          }}
+        >
           <Form.Item label="状态：" name="status">
             <Radio.Group onChange={onChange} value={value}>
-              <Radio value={4}>全部</Radio>
-              <Radio value={0}>草稿</Radio>
-              <Radio value={1}>待审核</Radio>
-              <Radio value={2}>审核通过</Radio>
-              <Radio value={3}>审核失败</Radio>
+              <Radio value={"4"}>全部</Radio>
+              <Radio value={"0"}>草稿</Radio>
+              <Radio value={"1"}>待审核</Radio>
+              <Radio value={"2"}>审核通过</Radio>
+              <Radio value={"3"}>审核失败</Radio>
             </Radio.Group>
           </Form.Item>
+          {/* 频道下拉列表 */}
           <Form.Item label="频道：" name="channel_id">
-            <Select
-              defaultValue="lucy"
-              style={{ width: 270 }}
-              onChange={handleChange}
-            >
-              <Option value="jack">Jack</Option>
-              <Option value="lucy">Lucy</Option>
-              <Option value="disabled" disabled>
-                Disabled
-              </Option>
-              <Option value="Yiminghe">yiminghe</Option>
+            <Select style={{ width: 270 }} placeholder="请选择文章频道">
+              {options.map((item) => (
+                <Option key={item.id} value={item.id}>
+                  {item.name}
+                </Option>
+              ))}
             </Select>
           </Form.Item>
           <Form.Item label="日期：" name="pubDate">
-            <RangePicker />
+            <RangePicker format="YYYY-MM-DD HH:mm" />
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">

@@ -32,9 +32,7 @@ const { actions, reducer: listReudcer } = createSlice({
   // 初始化数据
   initialState: initialState,
   // 同步方法用于对数据的增删改查
-  reducers: {
-
-  },
+  reducers: {},
   // 发起请求获取数据
   extraReducers: {
     [loadList.pending](state) {
