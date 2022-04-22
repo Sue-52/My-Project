@@ -9,5 +9,6 @@ export function getListData(data) {
 }
 
 export function deleteArticleById(id) {
+
   return request(`/mp/articles/${id}`, "delete")
 }

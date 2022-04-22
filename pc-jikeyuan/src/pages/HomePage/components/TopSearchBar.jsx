@@ -25,6 +25,12 @@ const EditArticle = () => {
   const handleChange = (value) => {
     console.log(`selected ${value}`);
   };
+
+  // 发起请求获取下拉列表数据
+
+  const handleSearchArticles = (values) => {
+    console.log(values);
+  };
   return (
     <>
       {/* 顶部内容查询栏 */}
@@ -41,8 +47,8 @@ const EditArticle = () => {
         style={{ marginBottom: "20px" }}
       >
         {/* 表单 */}
-        <Form>
-          <Form.Item label="状态：">
+        <Form onFinish={handleSearchArticles}>
+          <Form.Item label="状态：" name="status">
             <Radio.Group onChange={onChange} value={value}>
               <Radio value={4}>全部</Radio>
               <Radio value={0}>草稿</Radio>
@@ -51,7 +57,7 @@ const EditArticle = () => {
               <Radio value={3}>审核失败</Radio>
             </Radio.Group>
           </Form.Item>
-          <Form.Item label="频道：">
+          <Form.Item label="频道：" name="channel_id">
             <Select
               defaultValue="lucy"
               style={{ width: 270 }}
@@ -65,11 +71,13 @@ const EditArticle = () => {
               <Option value="Yiminghe">yiminghe</Option>
             </Select>
           </Form.Item>
-          <Form.Item label="日期：">
+          <Form.Item label="日期：" name="pubDate">
             <RangePicker />
           </Form.Item>
           <Form.Item>
-            <Button type="primary">筛选</Button>
+            <Button type="primary" htmlType="submit">
+              筛选
+            </Button>
           </Form.Item>
         </Form>
       </Card>

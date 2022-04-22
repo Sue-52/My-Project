@@ -5,7 +5,7 @@ import { getListData, deleteArticleById } from "@/apis/list";
 // 初始化状态
 const initialState = {
   loading: false,
-  list: {},
+  list: { list: 1 },
   error: null
 }
 
@@ -33,22 +33,13 @@ const { actions, reducer: listReudcer } = createSlice({
   initialState: initialState,
   // 同步方法用于对数据的增删改查
   reducers: {
-    // 删除文章方法
-    async deleteArticle(state, action) {
-      const data = action.payload
-      console.log(data);
-      try {
-        await deleteArticleById(data)
-      } catch (error) {
-        throw new Error("删除文章失败")
-      }
-    }
+
   },
   // 发起请求获取数据
   extraReducers: {
     [loadList.pending](state) {
       state.loading = true;
-      state.list = [];
+      state.list = {};
       state.error = null;
     },
     [loadList.fulfilled](state, action) {
@@ -58,7 +49,7 @@ const { actions, reducer: listReudcer } = createSlice({
     },
     [loadList.rejected](state, action) {
       state.loading = false;
-      state.list = [];
+      state.list = {};
       state.error = action.error;
     }
   }

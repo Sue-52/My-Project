@@ -5,6 +5,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 import { useDispatch, useSelector } from "react-redux";
 import { loadList, deleteArticle } from "@/store/list.splice";
+import { deleteArticleById } from "@/apis/list";
 
 // 标签状态
 const statusLabel = [
@@ -36,7 +37,9 @@ function ShowArticleTable() {
   }, [dispatch]);
 
   // 表格内容
-  const dataSource = selector.results;
+  const dataSource = useMemo(() => {
+    return selector;
+  });
   // 表格首航
   const columns = useMemo(() => {
     return [
@@ -117,7 +120,7 @@ function ShowArticleTable() {
       cancelText: "取消",
       okText: "确认",
       onOk: async () => {
-        await dispatch(deleteArticle(id));
+        await deleteArticleById(id);
         await dispatch(loadList());
         message.success("文章删除成功");
       },
@@ -130,7 +133,7 @@ function ShowArticleTable() {
         title={`根据筛选条件供查询到 ${selector.total_count} 条结果： `}
         style={{ width: "100%" }}
       >
-        <Table dataSource={dataSource} columns={columns} />;
+        <Table dataSource={dataSource.results} columns={columns} />;
       </Card>
     </>
   );
