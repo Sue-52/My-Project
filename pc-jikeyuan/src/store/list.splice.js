@@ -5,7 +5,7 @@ import { getListData, deleteArticleById } from "@/apis/list";
 // 初始化状态
 const initialState = {
   loading: false,
-  list: { list: 1 },
+  list: {},
   error: null
 }
 

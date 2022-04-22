@@ -5,7 +5,7 @@ import request from "../utils/https";
  * @returns 返回对象数据
  */
 export function getListData(data) {
-  return request("/mp/articles", "get", data)
+  return request("/mp/articles", "get", data);
 }
 
 /** 通过ID删除文章
