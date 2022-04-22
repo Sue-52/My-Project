@@ -32,6 +32,7 @@ function HomePage() {
 
   return (
     <Layout style={{ height: "100%" }}>
+      {/* 顶部导航栏 */}
       <Header
         style={{ padding: "0px", position: "fixed", zIndex: 1, width: "100%" }}
       >
@@ -41,11 +42,12 @@ function HomePage() {
           <Popover />
         </div>
       </Header>
-      <Layout>
+      <Layout style={{ height: "100%" }}>
+        {/* 侧边栏 */}
         <Sider
           style={{
             overflow: "auto",
-            height: "100%",
+            height: "100vh",
             paddingTop: 64,
             position: "fixed",
             left: 0,
@@ -75,7 +77,14 @@ function HomePage() {
             </Menu.Item>
           </Menu>
         </Sider>
-        <Content style={{ padding: "20px", marginLeft: 200, marginTop: 74 }}>
+        <Content
+          style={{
+            padding: "20px",
+            marginLeft: 200,
+            marginTop: 74,
+            height: "100%",
+          }}
+        >
           <Outlet />
         </Content>
       </Layout>

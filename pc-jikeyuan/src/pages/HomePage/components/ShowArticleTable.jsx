@@ -127,13 +127,32 @@ function ShowArticleTable() {
     });
   };
 
+  // 分页部分
+  const handleChangePage = async (page, pageSize) => {
+    console.log(page, pageSize);
+    const params = {};
+    params.page = page;
+    params.per_page = pageSize;
+    await dispatch(loadList(params));
+  };
+
   return (
     <>
       <Card
         title={`根据筛选条件供查询到 ${selector.total_count} 条结果： `}
         style={{ width: "100%" }}
       >
-        <Table dataSource={dataSource.results} columns={columns} />;
+        <Table
+          dataSource={dataSource.results}
+          columns={columns}
+          pagination={{
+            current: dataSource.page,
+            total: dataSource.total_count,
+            pageSize: dataSource.per_page,
+            onChange: handleChangePage,
+            onShowSizeChange: handleChangePage,
+          }}
+        />
       </Card>
     </>
   );
