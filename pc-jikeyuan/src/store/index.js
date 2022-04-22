@@ -1,5 +1,5 @@
 // 导入 configureStore 方法, 用于创建、配置 store 对象
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, } from "@reduxjs/toolkit";
 // 导入 counterReducer 函数, 用于配置 store 对象
 import listReudcer from "./list.splice";
 import userReducer from "./user.splice";
@@ -13,4 +13,8 @@ export default configureStore({
     user: userReducer,
     list: listReudcer
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getListData } from "../apis/list";
+// axios
+import { getListData, deleteArticleById } from "@/apis/list";
 
 // 初始化状态
 const initialState = {
@@ -11,8 +12,14 @@ const initialState = {
 // 异步请求数据
 export const loadList = createAsyncThunk("list/loadList", async (payload) => {
   try {
-    const { data } = await getListData(payload);
-    // console.log(data);
+    let { data } = await getListData(payload);
+
+    // 为每篇文章添加 key
+    data.results.forEach((item, index) => {
+      item.key = `${item.id}`;
+      return item;
+    });
+
     localStorage.setItem("list", data)
     return data
   } catch (error) {
@@ -26,7 +33,16 @@ const { actions, reducer: listReudcer } = createSlice({
   initialState: initialState,
   // 同步方法用于对数据的增删改查
   reducers: {
-
+    // 删除文章方法
+    async deleteArticle(state, action) {
+      const data = action.payload
+      console.log(data);
+      try {
+        await deleteArticleById(data)
+      } catch (error) {
+        throw new Error("删除文章失败")
+      }
+    }
   },
   // 发起请求获取数据
   extraReducers: {
@@ -49,6 +65,6 @@ const { actions, reducer: listReudcer } = createSlice({
 })
 
 // 导出方法
-export const { getAllList } = actions
+export const { deleteArticle } = actions
 
 export default listReudcer;

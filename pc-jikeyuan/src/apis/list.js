@@ -7,3 +7,7 @@ import request from "../utils/https";
 export function getListData(data) {
   return request("/mp/articles", "get", data)
 }
+
+export function deleteArticleById(id) {
+  return request(`/mp/articles/${id}`, "delete")
+}
