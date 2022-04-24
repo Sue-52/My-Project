@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    "allowSyntheticDefaultImports": false,
+    "checkJs": false,
+    "moduleResolution": "node",
+    "module": "",
+    "target": "Es2021",
+    "noLib": false
+  },
+  "exclude": ["node_modules", "dist", ".vscode"]
+}
