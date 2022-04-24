@@ -16,14 +16,20 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 // axios
 import { getAllChannels } from "@/apis/list";
+// bytemd
+import "bytemd/dist/index.css";
+import { Editor, Viewer } from "@bytemd/react";
+import gfm from "@bytemd/plugin-gfm";
+
+// 富文本插件
+const plugins = [
+  gfm(),
+  // Add more plugins here
+];
 
 function PubArticle() {
   const onFinish = (values) => {
     console.log("Success:", values);
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
   };
 
   //#region 频道栏数据获取
@@ -51,6 +57,13 @@ function PubArticle() {
   };
   //#endregion
 
+  //#region 富文本
+  const [value, setValue] = useState("");
+  const handleChangeText = (value) => {
+    setValue(value);
+    console.log(value);
+  };
+  //#endregion
   return (
     <div>
       <Card
@@ -71,7 +84,6 @@ function PubArticle() {
           wrapperCol={{ span: 10 }}
           initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item
@@ -101,41 +113,49 @@ function PubArticle() {
           </Form.Item>
 
           {/* 封面栏 */}
-          <Form.Item label="文章封面：">
-            {/* 一个FormItem只能有一个元素 */}
-            <Form.Item style={{ marginBottom: 0 }}>
-              <Radio.Group value={type} onChange={onTypeChange}>
-                <Radio value={1}>单图</Radio>
-                <Radio value={3}>三图</Radio>
-                <Radio value={0}>无图</Radio>
-              </Radio.Group>
-              {type > 0 ? (
-                <div style={{ marginTop: 16 }}>
-                  <Upload
-                    name="image"
-                    listType="picture-card"
-                    action="http://geek.itheima.net/v1_0/upload"
-                    fileList={fileList}
-                    onPreview={() => {}}
-                    onChange={onUploadChange}
-                  >
-                    {fileList.length < type ? (
-                      <div>
-                        <PlusOutlined />
-                        <div style={{ marginTop: 8 }}>Upload</div>
-                      </div>
-                    ) : null}
-                  </Upload>
-                </div>
-              ) : null}
-            </Form.Item>
-            {/* 这个位置放Upload组件 */}
+          {/* 一个FormItem只能有一个元素 */}
+          <Form.Item label="封面：" name="cover" style={{ marginBottom: 0 }}>
+            <Radio.Group value={type} onChange={onTypeChange}>
+              <Radio value={1}>单图</Radio>
+              <Radio value={3}>三图</Radio>
+              <Radio value={0}>无图</Radio>
+            </Radio.Group>
+            {type > 0 ? (
+              <div style={{ marginTop: 16 }}>
+                <Upload
+                  name="image"
+                  listType="picture-card"
+                  action="http://geek.itheima.net/v1_0/upload"
+                  fileList={fileList}
+                  onPreview={() => {}}
+                  onChange={onUploadChange}
+                >
+                  {fileList.length < type ? (
+                    <div>
+                      <PlusOutlined />
+                      <div style={{ marginTop: 8 }}>Upload</div>
+                    </div>
+                  ) : null}
+                </Upload>
+              </div>
+            ) : null}
           </Form.Item>
 
+          {/* 富文本区域 */}
+          <Form.Item label="内容：" name="content" wrapperCol={{ span: 16 }}>
+            <Editor
+              value={value}
+              plugins={plugins}
+              onChange={handleChangeText}
+            />
+          </Form.Item>
+
+          {/* 发布按钮 */}
           <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
             <Button type="primary" htmlType="submit">
-              Submit
+              发布文章
             </Button>
+            <Button style={{ marginLeft: 20 }}>存入草稿</Button>
           </Form.Item>
         </Form>
       </Card>
