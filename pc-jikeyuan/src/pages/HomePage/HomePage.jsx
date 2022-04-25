@@ -56,7 +56,7 @@ function HomePage() {
           }}
         >
           <Menu
-            defaultSelectedKeys={[
+            selectedKeys={[
               location.pathname === "/home"
                 ? "1"
                 : location.pathname === "/home/article"

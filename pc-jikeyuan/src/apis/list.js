@@ -31,12 +31,12 @@ export function getAllChannels() {
  * @param {Object} data 
  * @returns 
  */
-export function sendArticle(data) {
-  return request("/mp/articles", "post", data)
+export function sendArticle(data, draft) {
+  return request(`/mp/articles?draft=${draft}`, "post", data)
 }
 
-export function editArticle(target, data) {
-  return request(`/mp/articles/${target}`, "post", data)
+export function editArticle(target, draft, data) {
+  return request(`/mp/articles/${target}?draft=${draft}`, "put", data)
 }
 
 export function getArticle(target) {

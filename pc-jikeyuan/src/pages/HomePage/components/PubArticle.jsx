@@ -17,11 +17,17 @@ import { PlusOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router";
 // axios
-import { getAllChannels, sendArticle, getArticle } from "@/apis/list";
+import {
+  getAllChannels,
+  sendArticle,
+  getArticle,
+  editArticle,
+} from "@/apis/list";
 // bytemd
 import "bytemd/dist/index.css";
 import { Editor } from "@bytemd/react";
 import gfm from "@bytemd/plugin-gfm";
+import axios from "axios";
 
 // 富文本插件
 const plugins = [
@@ -32,7 +38,6 @@ const plugins = [
 function PubArticle() {
   const navigate = useNavigate();
   const param = useParams();
-  console.log(param.id);
 
   //#region 频道栏数据获取
   const [options, setOptions] = useState([]);
@@ -67,8 +72,8 @@ function PubArticle() {
   };
   //#endregion
 
-  // 发布文章
-  const onFinish = async (values) => {
+  //#region  发布文章
+  const onFinish = async (values, draft = false) => {
     if (type !== fileList.length) {
       return message.warning("请按照选择的封面类型上传图片");
     }
@@ -84,26 +89,50 @@ function PubArticle() {
 
     if (param.id) {
       // 编辑
-      data.id = param.id;
-      await editArticle(param.id, data);
+      await editArticle(param.id, draft, data);
+      message.success("文章修改成功");
+      navigate("/home/article");
     } else {
-      const reuslt = await sendArticle(data);
+      const reuslt = await sendArticle(data, draft);
       if (reuslt.message === "OK") {
         message.success("发布成功");
         navigate("/home/article");
       }
     }
   };
+  //#endregion
 
-  // 回显文章
+  //#region 存入草稿
+  const handleSaveDraft = async (draft) => {
+    if (param.id) {
+      // 编辑
+      await editArticle(param.id, draft, data);
+      message.success("存入草稿");
+      navigate("/home/article");
+    } else {
+      const reuslt = await sendArticle(data, draft);
+      if (reuslt.message === "OK") {
+        message.success("存入草稿");
+        navigate("/home/article");
+      }
+    }
+  };
+  //#endregion
+
+  //#region  回显文章
   const [form] = Form.useForm();
-  console.log(form.getFieldValue());
+  // console.log(form.getFieldValue("title"));
   const setFormData = async () => {
     if (param.id) {
       const { data } = await getArticle(param.id);
+      console.log(data);
       const { title, cover, content, channel_id } = data;
       form.setFieldsValue({ title, content, channel_id });
+      // 内容
+      setValue(content);
+      // 图片类别
       setType(cover.type);
+      //  图片
       setFileList(cover.images.map((item) => ({ url: item })));
     } else {
       setType(1);
@@ -113,7 +142,8 @@ function PubArticle() {
   };
   useEffect(() => {
     setFormData();
-  }, [form, param]);
+  }, [param]);
+  //#endregion
 
   return (
     <div>
@@ -134,8 +164,7 @@ function PubArticle() {
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 10 }}
           onFinish={onFinish}
-          autoComplete="off"
-          initialValues={form.getFieldValue()}
+          form={form}
         >
           <Form.Item
             label="标题"

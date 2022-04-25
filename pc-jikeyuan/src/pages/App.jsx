@@ -25,7 +25,7 @@ function App() {
             <Route path="" element={<HomeContent />} />
             <Route path="article" element={<EditArticle />} />
             <Route path="publish" element={<PubArticle />}>
-              <Route path=":id" />
+              <Route path=":id" element={<PubArticle />} />
             </Route>
           </Route>
           <Route path="/" element={<Redirect to="/login" />} />
