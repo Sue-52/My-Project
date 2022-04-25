@@ -25,3 +25,20 @@ export function deleteArticleById(id) {
 export function getAllChannels() {
   return request("/channels", "get")
 }
+
+/** 发布文章
+ * 
+ * @param {Object} data 
+ * @returns 
+ */
+export function sendArticle(data) {
+  return request("/mp/articles", "post", data)
+}
+
+export function editArticle(target, data) {
+  return request(`/mp/articles/${target}`, "post", data)
+}
+
+export function getArticle(target) {
+  return request(`mp/articles/${target}`, "get")
+}

@@ -6,6 +6,7 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { loadList, deleteArticle } from "@/store/list.splice";
 import { deleteArticleById } from "@/apis/list";
+import { useNavigate } from "react-router";
 
 // 标签状态
 const statusLabel = [
@@ -20,6 +21,7 @@ const defaultImg =
 
 function ShowArticleTable() {
   const dispatch = useDispatch();
+  const navigator = useNavigate();
   const selector = useSelector((state) => state.list.list);
   // 定义存储数据状态
   // 通过 redux 发起请求获取列表数据
@@ -96,7 +98,11 @@ function ShowArticleTable() {
         key: "action",
         render: (text, record) => (
           <Space>
-            <Button type="primary" shape="circle">
+            <Button
+              type="primary"
+              onClick={() => handleJumpToPublish(record.id)}
+              shape="circle"
+            >
               <EditOutlined />
             </Button>
             <Button
@@ -125,6 +131,10 @@ function ShowArticleTable() {
         message.success("文章删除成功");
       },
     });
+  };
+  // 跳转到发布文章页面
+  const handleJumpToPublish = (id) => {
+    navigator("/home/publish/" + id);
   };
 
   // 分页部分
