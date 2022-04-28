@@ -2,4 +2,4 @@
   参考笔记: http://toutiao.itheima.net/react/index.html#/zh-CN/h5
   接口文档: http://toutiao.itheima.net/api.html
   演示地址: http://geek.itheima.net/
-  仓库地址: https://gitee.com/zqran/geek-h5-89
+  仓库地址: https://gitee.com/zqran/geek-h5-89  
