@@ -24,7 +24,6 @@ import {
   editArticle,
 } from "@/apis/list";
 // bytemd
-import "bytemd/dist/index.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -93,19 +92,11 @@ function PubArticle() {
   //#endregion
 
   //#region 存入草稿
-  const handleSaveDraft = async (draft) => {
-    if (param.id) {
-      // 编辑
-      await editArticle(param.id, draft, data);
-      message.success("存入草稿");
-      navigate("/home/article");
-    } else {
-      const reuslt = await sendArticle(data, draft);
-      if (reuslt.message === "OK") {
-        message.success("存入草稿");
-        navigate("/home/article");
-      }
-    }
+  const handleSaveDraft = async () => {
+    try {
+      const values = await form.validateFields();
+      onFinish(values, true);
+    } catch (e) {}
   };
   //#endregion
 
@@ -223,7 +214,9 @@ function PubArticle() {
             <Button type="primary" htmlType="submit">
               {param.id ? "修改文章" : "发布文章"}
             </Button>
-            <Button style={{ marginLeft: 20 }}>存入草稿</Button>
+            <Button style={{ marginLeft: 20 }} onClick={handleSaveDraft}>
+              存入草稿
+            </Button>
           </Form.Item>
         </Form>
       </Card>
