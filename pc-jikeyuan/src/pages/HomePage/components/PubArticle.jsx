@@ -25,15 +25,8 @@ import {
 } from "@/apis/list";
 // bytemd
 import "bytemd/dist/index.css";
-import { Editor } from "@bytemd/react";
-import gfm from "@bytemd/plugin-gfm";
-import axios from "axios";
-
-// 富文本插件
-const plugins = [
-  gfm(),
-  // Add more plugins here
-];
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function PubArticle() {
   const navigate = useNavigate();
@@ -67,9 +60,6 @@ function PubArticle() {
 
   //#region 富文本
   const [value, setValue] = useState("");
-  const handleChangeText = (value) => {
-    setValue(value);
-  };
   //#endregion
 
   //#region  发布文章
@@ -225,11 +215,7 @@ function PubArticle() {
 
           {/* 富文本区域 */}
           <Form.Item label="内容：" name="content" wrapperCol={{ span: 16 }}>
-            <Editor
-              value={value}
-              plugins={plugins}
-              onChange={handleChangeText}
-            />
+            <ReactQuill theme="snow" value={value} onChange={setValue} />
           </Form.Item>
 
           {/* 发布按钮 */}
