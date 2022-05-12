@@ -4,9 +4,9 @@ import { Route, useHistory, useLocation } from 'react-router-dom';
 import Icon from '@/components/Icon';
 
 // 导入页面组件，配置路由
-import Home from '../Home';
-import Profile from '../Profile';
-import Question from '../Question';
+import Home from '../HomePage';
+import Profile from '../ProfilePage';
+import Question from '../QuestionPage';
 import Video from '../Video';
 import styles from './index.module.scss';
 

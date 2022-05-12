@@ -4,11 +4,12 @@ import { Redirect, Route, Router, Switch } from 'react-router-dom';
 
 import Article from '@/pages/Article';
 import Layout from '@/pages/Layout';
-import Login from '@/pages/Login';
-import ProfileEdit from '@/pages/Profile/Edit';
+import Login from '@/pages/LoginPage';
+import ProfileEdit from '@/pages/ProfilePage/Edit';
 import Search from '@/pages/Search';
 import SearchResult from '@/pages/Search/Result';
 import { customHistory } from '@/utils/history';
+
 function App() {
   return (
     <div className="app">

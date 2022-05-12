@@ -30,7 +30,7 @@ import {
   updateCommentCount,
 } from '@/store/actions/article';
 import { ArtComment } from '@/types/data';
-import { useInitialState } from '@/utils/use-initial-state';
+import { useInitialState } from '@/hooks/useInitialState';
 
 import CommentFooter from './components/CommentFooter';
 import CommentInput from './components/CommentInput';

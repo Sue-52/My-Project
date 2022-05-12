@@ -12,7 +12,7 @@ type ApiResponse<Data> = {
 // 接口返回的数据类型：
 export type LoginResponse = ApiResponse<Token>;
 
-// 我的 - 个人信息
+// 个人信息
 export type User = {
   id: string;
   name: string;

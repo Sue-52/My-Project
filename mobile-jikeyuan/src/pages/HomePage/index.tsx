@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 
 import Icon from '@/components/Icon';
 import { getChannels, toggleChannel } from '@/store/actions/home';
-import { useInitialState } from '@/utils/use-initial-state';
+import { useInitialState } from '@/hooks/useInitialState';
 
 import Channels from './Channels';
 import ArticleList from './components/ArticleList';

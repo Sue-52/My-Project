@@ -11,7 +11,7 @@ import {
 } from '@/store/actions/home';
 import { Channel } from '@/types/data';
 import { RootState } from '@/types/store';
-import { useInitialState } from '@/utils/use-initial-state';
+import { useInitialState } from '@/hooks/useInitialState';
 
 import styles from './index.module.scss';
 

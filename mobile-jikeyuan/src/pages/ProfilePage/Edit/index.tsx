@@ -7,14 +7,16 @@ import { useHistory } from 'react-router-dom';
 
 import { logout } from '@/store/actions/login';
 import { getUserProfile, updatePhoto, updateUserProfile } from '@/store/actions/profile';
-import { useInitialState } from '@/utils/use-initial-state';
-
+import { useInitialState } from '@/hooks/useInitialState';
+// 组件
 import EditInput from './components/EditInput';
 import EditList from './components/EditList';
+// 样式
 import styles from './index.module.scss';
 
 const Item = List.Item;
 
+// 类型定义
 type InputPopup = {
   type: '' | 'name' | 'intro';
   value: string;

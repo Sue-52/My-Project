@@ -17,7 +17,7 @@ const http = axios.create({
 // 请求拦截器
 http.interceptors.request.use((config) => {
   // 获取token
-  // 注意：极客园h5项目中，login 存储的是一个对象，对象中的 token 属性，才是登录身份令牌
+  // 极客园h5项目中，login 存储的是一个对象，对象中的 token 属性，才是登录身份令牌
   const {
     login: { token },
   } = store.getState();
@@ -52,8 +52,6 @@ http.interceptors.response.use(undefined, (error) => {
         customHistory.push('/login', {
           from: customHistory.location.pathname,
         });
-        // 触发退出 action，将 token 等清除
-        // store.dispatch(logout())
       },
     });
   }
