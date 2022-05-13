@@ -2,33 +2,35 @@ import './App.scss';
 
 import { Redirect, Route, Router, Switch } from 'react-router-dom';
 
+// 组件
 import Article from '@/pages/Article';
 import Layout from '@/pages/Layout';
 import Login from '@/pages/LoginPage';
-import ProfileEdit from '@/pages/ProfilePage/Edit';
-import Search from '@/pages/Search';
-import SearchResult from '@/pages/Search/Result';
-import { customHistory } from '@/utils/history';
+import ProfileEdit from '@/pages/ProfilePage/EditPage';
+import Search from '@/pages/SearchPage';
+import SearchResult from '@/pages/SearchPage/Result';
+// 引入方法
+import { useCustomHistory } from '@/hooks/useCustomHistory';
 
 function App() {
   return (
     <div className="app">
-      <Router history={customHistory}>
+      {/* react-router-dom */}
+      <Router history={useCustomHistory}>
         <Switch>
-          {/*https://v5.reactrouter.com/web/api/Route/render-func*/}
+          {/* 重定向到首页 */}
           <Route exact path="/" render={() => <Redirect to="/home" />}></Route>
-          <Route path={'/home'} component={Layout}></Route>
-          <Route path={'/login'} component={Login}></Route>
-          <Route path="/profile/edit">
-            <ProfileEdit></ProfileEdit>
-          </Route>
+          {/* 首页 */}
+          <Route path={'/home'} component={Layout} />
+          {/* 登录页 */}
+          <Route path={'/login'} component={Login} />
+          {/* 个人信息编辑页 */}
+          <Route path="/profile/edit" component={ProfileEdit} />
           {/*搜索*/}
-          <Route exact path="/search">
-            <Search />
-          </Route>
-          <Route path="/search/result">
-            <SearchResult />
-          </Route>
+          <Route exact path="/search" component={Search} />
+          {/* 搜索结果页 */}
+          <Route path="/search/result" component={SearchResult} />
+          {/* 文章页 */}
           <Route path="/articles/:id" component={Article}></Route>
         </Switch>
       </Router>

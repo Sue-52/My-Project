@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import store from '@/store';
 
-import { customHistory } from './history';
+import { useCustomHistory } from '@/hooks/useCustomHistory';
 // import { logout } from '@/store/actions'
 
 const http = axios.create({
@@ -49,8 +49,8 @@ http.interceptors.response.use(undefined, (error) => {
       content: '登录超时，请重新登录',
       duration: 1000,
       afterClose: () => {
-        customHistory.push('/login', {
-          from: customHistory.location.pathname,
+        useCustomHistory.push('/login', {
+          from: useCustomHistory.location.pathname,
         });
       },
     });

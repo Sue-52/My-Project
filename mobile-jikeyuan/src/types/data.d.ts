@@ -146,3 +146,17 @@ export type AddArticleCommnet = {
   target: string;
 };
 export type AddArticleCommnetResponse = ApiResponse<AddArticleCommnet>;
+// 问题列表信息
+export type HomeQuestionLists = {
+  title: string;
+  agree: number;
+  comment: number;
+  time: string;
+  img: string;
+};
+// 视频列表信息
+export type VideoList = {
+  title: string;
+  video: string;
+  playTime: number;
+}

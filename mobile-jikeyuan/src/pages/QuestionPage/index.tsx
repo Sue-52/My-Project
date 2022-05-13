@@ -1,93 +1,70 @@
 import { NavBar } from 'antd-mobile';
+import { useState } from 'react';
 
 import styles from './index.module.scss';
 
+// 引入类型
+import { HomeQuestionLists } from '@/types/data';
+
 const Question = () => {
+  const [data, setData] = useState<HomeQuestionLists[]>([
+    {
+      title: '作为 IT 行业的过来人，你有什么话想对后辈说的？',
+      agree: 1000,
+      comment: 100,
+      time: '2020-01-01',
+      img: 'http://geek.itheima.net/resources/images/9.jpg',
+    },
+    {
+      title: '作为 IT 行业的过来人，你有什么话想对后辈说的？',
+      agree: 1000,
+      comment: 100,
+      time: '2020-01-01',
+      img: 'http://geek.itheima.net/resources/images/9.jpg',
+    },
+    {
+      title: '作为 IT 行业的过来人，你有什么话想对后辈说的？',
+      agree: 1000,
+      comment: 100,
+      time: '2020-01-01',
+      img: 'http://geek.itheima.net/resources/images/9.jpg',
+    },
+    {
+      title: '作为 IT 行业的过来人，你有什么话想对后辈说的？',
+      agree: 1000,
+      comment: 100,
+      time: '2020-01-01',
+      img: 'http://geek.itheima.net/resources/images/9.jpg',
+    },
+    {
+      title: '作为 IT 行业的过来人，你有什么话想对后辈说的？',
+      agree: 1000,
+      comment: 100,
+      time: '2020-01-01',
+      img: 'http://geek.itheima.net/resources/images/9.jpg',
+    },
+  ]);
+
   return (
     <div className={styles.root}>
       <NavBar>问答</NavBar>
 
       <div className="question-list">
-        <div className="question-item">
-          <div className="left">
-            <h3>作为 IT 行业的过来人，你有什么话想对后辈说的？</h3>
-            <div className="info">
-              <span>赞同 1000+</span>
-              <span>评论 500+</span>
-              <span>1小时前</span>
+        {data.map((item, index) => (
+          <div className="question-item" key={index}>
+            <div className="left">
+              <h3>{item.title}</h3>
+              <div className="info">
+                <span>赞同 {item.agree}+</span>
+                <span>评论 {item.comment}+</span>
+                <span>{item.time}</span>
+              </div>
+            </div>
+            <div className="right">
+              <img src={item.img} alt="" />
             </div>
           </div>
-          <div className="right">
-            <img
-              src="https://pic1.zhimg.com/80/v2-8e77b2771314f674cccba5581560d333_xl.jpg?source=4e949a73"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="question-item">
-          <div className="left">
-            <h3>作为 IT 行业的过来人，你有什么话想对后辈说的？</h3>
-            <div className="info">
-              <span>赞同 1000+</span>
-              <span>评论 500+</span>
-              <span>1小时前</span>
-            </div>
-          </div>
-          <div className="right">
-            <img
-              src="https://pic1.zhimg.com/80/v2-8e77b2771314f674cccba5581560d333_xl.jpg?source=4e949a73"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="question-item">
-          <div className="left">
-            <h3>作为 IT 行业的过来人，你有什么话想对后辈说的？</h3>
-            <div className="info">
-              <span>赞同 1000+</span>
-              <span>评论 500+</span>
-              <span>1小时前</span>
-            </div>
-          </div>
-          <div className="right">
-            <img
-              src="https://pic1.zhimg.com/80/v2-8e77b2771314f674cccba5581560d333_xl.jpg?source=4e949a73"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="question-item">
-          <div className="left">
-            <h3>作为 IT 行业的过来人，你有什么话想对后辈说的？</h3>
-            <div className="info">
-              <span>赞同 1000+</span>
-              <span>评论 500+</span>
-              <span>1小时前</span>
-            </div>
-          </div>
-          <div className="right">
-            <img
-              src="https://pic1.zhimg.com/80/v2-8e77b2771314f674cccba5581560d333_xl.jpg?source=4e949a73"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="question-item">
-          <div className="left">
-            <h3>作为 IT 行业的过来人，你有什么话想对后辈说的？</h3>
-            <div className="info">
-              <span>赞同 1000+</span>
-              <span>评论 500+</span>
-              <span>1小时前</span>
-            </div>
-          </div>
-          <div className="right">
-            <img
-              src="https://pic1.zhimg.com/80/v2-8e77b2771314f674cccba5581560d333_xl.jpg?source=4e949a73"
-              alt=""
-            />
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

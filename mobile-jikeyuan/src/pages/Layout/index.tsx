@@ -7,7 +7,7 @@ import Icon from '@/components/Icon';
 import Home from '../HomePage';
 import Profile from '../ProfilePage';
 import Question from '../QuestionPage';
-import Video from '../Video';
+import Video from '../VideoPage';
 import styles from './index.module.scss';
 
 const tabs = [
