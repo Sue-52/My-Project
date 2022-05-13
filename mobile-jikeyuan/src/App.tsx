@@ -3,11 +3,12 @@ import './App.scss';
 import { Redirect, Route, Router, Switch } from 'react-router-dom';
 
 // 组件
-import Article from '@/pages/Article';
+import Article from '@/pages/ArticlePage';
 import Layout from '@/pages/Layout';
 import Login from '@/pages/LoginPage';
 import ProfileEdit from '@/pages/ProfilePage/EditPage';
 import Search from '@/pages/SearchPage';
+import Chat from '@/pages/ChatPage';
 import SearchResult from '@/pages/SearchPage/Result';
 // 引入方法
 import { useCustomHistory } from '@/hooks/useCustomHistory';
@@ -32,6 +33,8 @@ function App() {
           <Route path="/search/result" component={SearchResult} />
           {/* 文章页 */}
           <Route path="/articles/:id" component={Article}></Route>
+          {/* 小智同学页 , 未完成*/}
+          <Route path="/chat" component={Chat} />
         </Switch>
       </Router>
     </div>

@@ -31,7 +31,8 @@
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "2.3.0",
-    "sass": "^1.50.1"
+    "sass": "^1.50.1",
+    "socket.io-client": "^4.5.0"
   },
   "devDependencies": {
     "@types/dompurify": "^2.3.3",

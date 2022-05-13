@@ -61,7 +61,6 @@ const ArticleItem = ({ type, title, aut_name, comm_count, pubdate, images }: Pro
       <div className={classnames('article-info', type === 0 && 'none-mt')}>
         <span>{aut_name}</span>
         <span>{comm_count} 评论</span>
-        {/* <span>2 天前</span> */}
         <span>{dayjs().to(dayjs(pubdate))}</span>
         <span className="close">
           <Icon type="iconbtn_essay_close" />

@@ -15,14 +15,9 @@ type Props = {
 const ArticleList = ({ channelId }: Props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  // 控制是否还有更多数据的状态
-  // const [hasMore, setHasMore] = useState(true)
-  // 数据
-  // const [data, setData] = useState<string[]>([])
 
   // 获取当前频道的文章列表数据
   const { channelArticles } = useSelector((state: RootState) => state.home);
-  // console.log(channelArticles)
   // 注意：此处的 频道对应的 文章列表数据，可能是不存在的，所以，此处设置默认值
   const currentChannelArticle = channelArticles[channelId] ?? {
     pre_timestamp: Date.now() + '',
@@ -52,6 +47,7 @@ const ArticleList = ({ channelId }: Props) => {
       <PullToRefresh onRefresh={onRefresh}>
         {/* 文章列表中的每一项 */}
         {results.map((item, index) => {
+          // 解构数据
           const {
             art_id,
             title,
