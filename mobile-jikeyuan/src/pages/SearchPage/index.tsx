@@ -105,7 +105,6 @@ const SearchPage = () => {
         className="navbar"
         onBack={() => history.push('/home')}
         right={
-          // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
           <span className="search-text" onClick={() => onSearch(searchText)}>
             搜索
           </span>
@@ -122,7 +121,6 @@ const SearchPage = () => {
         {highlightSuggestion.map((item, index) => (
           <div key={index} className="result-item">
             <Icon className="icon-search" type="iconbtn_search" />
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
             <div
               className="result-value"
               onClick={() => onSearch(item.left + item.search + item.right)}
@@ -144,7 +142,6 @@ const SearchPage = () => {
           }}
         >
           <div className="history-header">
-            {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
             <span onClick={onClearHistory}>
               <Icon type="iconbtn_del" />
               清除全部

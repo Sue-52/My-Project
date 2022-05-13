@@ -33,7 +33,7 @@ function App() {
           <Route path="/search/result" component={SearchResult} />
           {/* 文章页 */}
           <Route path="/articles/:id" component={Article}></Route>
-          {/* 小智同学页 , 未完成*/}
+          {/* 小智同学页 ：未完成*/}
           <Route path="/chat" component={Chat} />
         </Switch>
       </Router>

@@ -96,7 +96,6 @@ const Profile = ({ profile, getUser }: Props) => {
             <Icon type="iconbtn_feedback" />
             <div>用户反馈</div>
           </div>
-          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
           <div className="service-item" onClick={() => history.push('/chat')}>
             <Icon type="iconbtn_xiaozhitongxue" />
             <div>小智同学</div>

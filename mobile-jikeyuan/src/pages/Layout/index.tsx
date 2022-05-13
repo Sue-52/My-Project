@@ -26,19 +26,13 @@ const Layout = () => {
   }
   return (
     <div className={styles.root}>
-      <Route exact path="/home">
-        <Home></Home>
-      </Route>
-      <Route path="/home/question">
-        <Question></Question>
-      </Route>
-      <Route path="/home/video">
-        <Video></Video>
-      </Route>
-      <Route path="/home/profile">
-        <Profile></Profile>
-      </Route>
+      {/* 内容区域*/}
+      <Route exact path="/home" component={Home} />
+      <Route path="/home/question" component={Question} />
+      <Route path="/home/video" component={Video} />
+      <Route path="/home/profile" component={Profile} />
 
+      {/* 底部导航栏 */}
       <TabBar
         className="tab-bar"
         activeKey={localtion.pathname}
